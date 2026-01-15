@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { LogItem, MockRule, MockKitState } from './types';
+
+const STORAGE_KEY = 'react-axios-mockkit-rules';
 
 type Action =
   | { type: 'ADD_LOG'; payload: LogItem }
@@ -11,9 +13,20 @@ type Action =
   | { type: 'TOGGLE_OPEN' }
   | { type: 'CLEAR_LOGS' };
 
+const loadInitialRules = (): MockRule[] => {
+  if (typeof window === 'undefined') return [];
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch (error) {
+    console.error('Failed to load mock rules from localStorage', error);
+    return [];
+  }
+};
+
 const initialState: MockKitState = {
   logs: [],
-  rules: [],
+  rules: loadInitialRules(),
   isOpen: false,
 };
 
@@ -56,6 +69,12 @@ function reducer(state: MockKitState, action: Action): MockKitState {
 
 export const MockKitProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.rules));
+    }
+  }, [state.rules]);
 
   return (
     <MockKitContext.Provider value={{ state, dispatch }}>
