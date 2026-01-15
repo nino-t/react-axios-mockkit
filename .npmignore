@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# Whitelist (Allow)
+!dist/**
+!package.json
+!README.md
+!LICENSE
