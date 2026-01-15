@@ -177,6 +177,16 @@ export const DevTools = () => {
                         value={editingRule.url} 
                         onChange={(e) => setEditingRule({ ...editingRule, url: e.target.value })} 
                     />
+                    <div style={{ display: 'flex', gap: '15px', marginTop: '5px', marginBottom: '10px' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '12px', cursor: 'pointer' }}>
+                            <input 
+                                type="checkbox"
+                                checked={editingRule.exactMatch || false}
+                                onChange={(e) => setEditingRule({ ...editingRule, exactMatch: e.target.checked })}
+                            />
+                            Exact Match (Strict)
+                        </label>
+                    </div>
                   </div>
                   <div>
                     <label>Method</label>

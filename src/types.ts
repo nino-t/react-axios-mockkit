@@ -8,6 +8,7 @@ export interface MockRule {
   delay?: number;
   response: any;
   enabled: boolean;
+  exactMatch?: boolean;
 }
 
 export interface LogItem {

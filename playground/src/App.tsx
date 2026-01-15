@@ -67,6 +67,8 @@ const App = () => {
         <p>Use the buttons below to trigger requests. Open the MockKit panel (bottom right) to see logs and mock them.</p>
         <div style={{ marginBottom: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           <button onClick={() => fetchData('/todos/1')}>Get Todo 1</button>
+          <button onClick={() => fetchData('/todos/2')}>Get Todo 2</button>
+          <button onClick={() => fetchData('/todos/videos')}>Get Todo - Videos</button>
           <button onClick={() => fetchData('/users/1')}>Get User 1</button>
           <button onClick={() => fetchData('/posts')}>Get Posts</button>
           <button onClick={() => fetchData('/posts?userId=1')}>Get Posts (Query String)</button>
