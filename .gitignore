@@ -23,3 +23,6 @@ dist
 *.swp
 *.swo
 *~
+
+# File unnecessary
+.DS_Store

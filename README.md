@@ -2,7 +2,7 @@
 
 A lightweight, zero-config React library to intercept, inspect, and mock Axios requests with a built-in UI. Perfect for frontend development when APIs are not ready, or for debugging edge cases like error states and slow networks.
 
-![React Axios MockKit](https://via.placeholder.com/800x400?text=React+Axios+MockKit+UI+Preview)
+![React Axios MockKit](https://raw.githubusercontent.com/nino-t/react-axios-mockkit/main/playground/screenshot.png)
 
 ## Features
 
