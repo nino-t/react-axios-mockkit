@@ -72,6 +72,18 @@ export const DevTools = () => {
         {activeTab === 'logs' && (
           <>
             <div className="ramk-list">
+              <button 
+                  className="ramk-btn ramk-btn-danger" 
+                  style={{ width: '100%', marginBottom: '10px' }}
+                  onClick={() => {
+                      if (confirm('Clear all logs?')) {
+                          dispatch({ type: 'CLEAR_LOGS' });
+                          setSelectedLogId(null);
+                      }
+                  }}
+              >
+                  Clear Logs
+              </button>
               {state.logs.map((log) => (
                 <div
                   key={log.id}
@@ -122,9 +134,10 @@ export const DevTools = () => {
         {activeTab === 'mocks' && (
           <>
             <div className="ramk-list">
+              <div style={{ display: 'flex', gap: '5px', marginBottom: '10px' }}>
                 <button 
                     className="ramk-btn" 
-                    style={{ width: '100%', marginBottom: '10px' }}
+                    style={{ flex: 1 }}
                     onClick={() => setEditingRule({
                         id: generateId(),
                         url: '',
@@ -135,8 +148,21 @@ export const DevTools = () => {
                         delay: 0
                     })}
                 >
-                    + New Mock
+                    + New
                 </button>
+                <button 
+                    className="ramk-btn ramk-btn-danger" 
+                    style={{ flex: 1 }}
+                    onClick={() => {
+                        if (confirm('Delete ALL mock rules? This cannot be undone.')) {
+                            dispatch({ type: 'CLEAR_RULES' });
+                            setEditingRule(null);
+                        }
+                    }}
+                >
+                    Clear All
+                </button>
+              </div>
               {state.rules.map((rule) => (
                 <div
                   key={rule.id}

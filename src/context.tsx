@@ -11,7 +11,8 @@ type Action =
   | { type: 'TOGGLE_RULE'; payload: string }
   | { type: 'DELETE_RULE'; payload: string }
   | { type: 'TOGGLE_OPEN' }
-  | { type: 'CLEAR_LOGS' };
+  | { type: 'CLEAR_LOGS' }
+  | { type: 'CLEAR_RULES' };
 
 const loadInitialRules = (): MockRule[] => {
   if (typeof window === 'undefined') return [];
@@ -62,6 +63,8 @@ function reducer(state: MockKitState, action: Action): MockKitState {
       return { ...state, isOpen: !state.isOpen };
     case 'CLEAR_LOGS':
       return { ...state, logs: [] };
+    case 'CLEAR_RULES':
+      return { ...state, rules: [] };
     default:
       return state;
   }

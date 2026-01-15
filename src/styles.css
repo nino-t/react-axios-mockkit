@@ -73,6 +73,7 @@
   width: 300px;
   border-right: 1px solid #eee;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .ramk-list-item {
