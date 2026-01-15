@@ -1,7 +1,23 @@
 {
   "name": "react-axios-mockkit",
+  "type": "module",
+  "keywords": [
+    "react",
+    "axios",
+    "mock",
+    "interceptor",
+    "ui"
+  ],
   "version": "0.0.1",
   "description": "A React library to intercept and mock Axios requests with a UI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nino-t/react-axios-mockkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nino-t/react-axios-mockkit/issues"
+  },
+  "homepage": "https://github.com/nino-t/react-axios-mockkit#readme",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -39,6 +55,6 @@
     "vite": "^4.4.0",
     "vite-plugin-dts": "^3.0.0"
   },
-  "author": "",
+  "author": "Trisno Nino <ninotrisno34@gmail.com>",
   "license": "ISC"
 }
