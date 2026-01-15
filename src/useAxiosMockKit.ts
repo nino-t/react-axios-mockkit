@@ -38,7 +38,13 @@ export const useAxiosMockKit = (axiosInstance: AxiosInstance) => {
         try {
             // Note: axios.getUri might not be available on the instance directly inside adapter context easily 
             // without binding, but let's try to construct it manually for safety or use the instance.
-            fullUrl = axiosInstance.getUri(config);
+            const uri = axiosInstance.getUri(config);
+            const baseURL = axiosInstance.defaults.baseURL || axios.defaults.baseURL;
+            if (baseURL && uri.startsWith(baseURL)) {
+                fullUrl = uri.slice(baseURL.length);
+            } else {
+                fullUrl = uri;
+            }
         } catch (e) {
             // Fallback if getUri fails or isn't available
             // This is a simple fallback and might not match custom serializers perfectly
