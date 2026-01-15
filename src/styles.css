@@ -1,0 +1,137 @@
+.ramk-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+
+.ramk-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #2196f3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.ramk-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50vh;
+  background: white;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #ddd;
+}
+
+.ramk-header {
+  padding: 10px 20px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ramk-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.ramk-tab {
+  padding: 5px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.ramk-tab.active {
+  color: #2196f3;
+  border-bottom: 2px solid #2196f3;
+}
+
+.ramk-content {
+  flex: 1;
+  overflow: auto;
+  padding: 10px;
+  display: flex;
+}
+
+.ramk-list {
+  width: 300px;
+  border-right: 1px solid #eee;
+  overflow-y: auto;
+}
+
+.ramk-list-item {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+.ramk-list-item:hover {
+  background: #f9f9f9;
+}
+.ramk-list-item.active {
+  background: #e3f2fd;
+}
+
+.ramk-detail {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.ramk-badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: white;
+  margin-right: 5px;
+}
+.method-get { background: #61affe; }
+.method-post { background: #49cc90; }
+.method-put { background: #fca130; }
+.method-delete { background: #f93e3e; }
+
+.ramk-input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.ramk-textarea {
+  width: 100%;
+  height: 200px;
+  font-family: monospace;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.ramk-btn {
+  padding: 5px 10px;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.ramk-btn-danger {
+  background: #f44336;
+}
