@@ -26,7 +26,29 @@ export const useAxiosMockKit = (axiosInstance: AxiosInstance) => {
     };
 
     const mockAdapter: AxiosAdapter = async (config) => {
-      const { url, method } = config;
+      // Construct full URL with params if they exist
+      const { url, method, params } = config;
+      
+      let fullUrl = url || '';
+      if (params && fullUrl) {
+        // Use axios's internal logic or a simple serializer to append params
+        // Since we don't have access to internal buildURL easily without importing it,
+        // and we want to match what the user likely types in the mock rule.
+        // We will use a URLSearchParams approach or axios.getUri if available (Axios 0.19+)
+        try {
+            // Note: axios.getUri might not be available on the instance directly inside adapter context easily 
+            // without binding, but let's try to construct it manually for safety or use the instance.
+            fullUrl = axiosInstance.getUri(config);
+        } catch (e) {
+            // Fallback if getUri fails or isn't available
+            // This is a simple fallback and might not match custom serializers perfectly
+            const queryString = new URLSearchParams(params).toString();
+            if (queryString) {
+                fullUrl += (fullUrl.includes('?') ? '&' : '?') + queryString;
+            }
+        }
+      }
+
       const id = generateId();
       const startTime = Date.now();
       
@@ -34,14 +56,14 @@ export const useAxiosMockKit = (axiosInstance: AxiosInstance) => {
         id,
         timestamp: startTime,
         method: method?.toUpperCase() || 'GET',
-        url: url || '',
+        url: fullUrl,
         requestData: config.data,
         requestHeaders: config.headers,
         isMocked: false,
       };
 
-      // Check for match
-      const matchedRule = matchRule(url || '', method || 'get', stateRef.current.rules);
+      // Check for match using the full URL
+      const matchedRule = matchRule(fullUrl, method || 'get', stateRef.current.rules);
 
       if (matchedRule) {
         logItem.isMocked = true;
