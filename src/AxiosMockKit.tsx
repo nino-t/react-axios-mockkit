@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { AxiosInstance } from 'axios';
 import { MockKitProvider } from './context';
 import { DevTools } from './components/DevTools';
@@ -10,7 +10,7 @@ const MockKitInitializer = ({ instance }: { instance: AxiosInstance }) => {
 };
 
 interface AxiosMockKitProps {
-    children: React.ReactNode;
+    children: ReactNode;
     instance?: AxiosInstance; 
 }
 

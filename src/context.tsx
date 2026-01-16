@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useReducer, ReactNode, useEffect, Dispatch } from 'react';
 import { LogItem, MockRule, MockKitState } from './types';
 
 const STORAGE_KEY = 'react-axios-mockkit-rules';
@@ -33,7 +33,7 @@ const initialState: MockKitState = {
 
 const MockKitContext = createContext<{
   state: MockKitState;
-  dispatch: React.Dispatch<Action>;
+  dispatch: Dispatch<Action>;
 } | undefined>(undefined);
 
 function reducer(state: MockKitState, action: Action): MockKitState {
