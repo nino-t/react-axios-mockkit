@@ -21,8 +21,8 @@ export const useAxiosMockKit = (axiosInstance: AxiosInstance) => {
     
     // Fallback to global axios default adapter if instance doesn't have one
     const getFallbackAdapter = () => {
-        if (typeof originalAdapter === 'function') return originalAdapter;
-        return axios.defaults.adapter as AxiosAdapter;
+        if (originalAdapter) return originalAdapter;
+        return axios.defaults.adapter;
     };
 
     const mockAdapter: AxiosAdapter = async (config) => {
@@ -106,12 +106,17 @@ export const useAxiosMockKit = (axiosInstance: AxiosInstance) => {
       }
 
       // Pass through
-      const actualAdapter = getFallbackAdapter();
+      const adapterConfig = getFallbackAdapter();
       
       try {
         let responsePromise;
-        if (typeof actualAdapter === 'function') {
-             responsePromise = actualAdapter(config);
+
+        // Try to resolve adapter using axios.getAdapter (Axios 1.0+)
+        if (typeof axios.getAdapter === 'function') {
+            const adapter = axios.getAdapter(adapterConfig);
+            responsePromise = adapter(config);
+        } else if (typeof adapterConfig === 'function') {
+             responsePromise = adapterConfig(config);
         } else {
              const defaultAdapter = axios.defaults.adapter as AxiosAdapter;
              if (typeof defaultAdapter === 'function') {
