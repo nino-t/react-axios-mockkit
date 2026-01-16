@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, ReactNode, useEffect, Dispatch } from 'react';
+import * as React from 'react';
 import { LogItem, MockRule, MockKitState } from './types';
 
 const STORAGE_KEY = 'react-axios-mockkit-rules';
@@ -31,9 +31,9 @@ const initialState: MockKitState = {
   isOpen: false,
 };
 
-const MockKitContext = createContext<{
+const MockKitContext = React.createContext<{
   state: MockKitState;
-  dispatch: Dispatch<Action>;
+  dispatch: React.Dispatch<Action>;
 } | undefined>(undefined);
 
 function reducer(state: MockKitState, action: Action): MockKitState {
@@ -70,10 +70,10 @@ function reducer(state: MockKitState, action: Action): MockKitState {
   }
 }
 
-export const MockKitProvider = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export const MockKitProvider = ({ children }: { children: React.ReactNode }) => {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state.rules));
     }
@@ -87,7 +87,7 @@ export const MockKitProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useMockKit = () => {
-  const context = useContext(MockKitContext);
+  const context = React.useContext(MockKitContext);
   if (!context) {
     throw new Error('useMockKit must be used within a MockKitProvider');
   }

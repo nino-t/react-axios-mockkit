@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import * as React from 'react';
 import axios, { AxiosInstance, AxiosAdapter, AxiosResponse } from 'axios';
 import { useMockKit } from './context';
 import { matchRule, generateId } from './utils';
@@ -8,15 +8,15 @@ export const useAxiosMockKit = (axiosInstance: AxiosInstance) => {
   const { state, dispatch } = useMockKit();
   
   // Refs to keep latest state/dispatch without re-triggering effect
-  const stateRef = useRef(state);
-  const dispatchRef = useRef(dispatch);
+  const stateRef = React.useRef(state);
+  const dispatchRef = React.useRef(dispatch);
 
-  useEffect(() => {
+  React.useEffect(() => {
     stateRef.current = state;
     dispatchRef.current = dispatch;
   }, [state, dispatch]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const originalAdapter = axiosInstance.defaults.adapter;
     
     // Fallback to global axios default adapter if instance doesn't have one

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import * as React from 'react';
 import { useMockKit } from '../context';
 import { LogItem, MockRule } from '../types';
 import '../styles.css';
@@ -6,9 +6,9 @@ import { generateId } from '../utils';
 
 export const DevTools = () => {
   const { state, dispatch } = useMockKit();
-  const [activeTab, setActiveTab] = useState<'logs' | 'mocks'>('logs');
-  const [selectedLogId, setSelectedLogId] = useState<string | null>(null);
-  const [editingRule, setEditingRule] = useState<MockRule | null>(null);
+  const [activeTab, setActiveTab] = React.useState<'logs' | 'mocks'>('logs');
+  const [selectedLogId, setSelectedLogId] = React.useState<string | null>(null);
+  const [editingRule, setEditingRule] = React.useState<MockRule | null>(null);
 
   if (!state.isOpen) {
     return (
